@@ -1,6 +1,6 @@
 <?php
 
-echo("<h1>Dockerized world</h1>");
+echo("<h1>Dockerizing this Server!!!</h1>");
 // if (file_exists('/secrets/db_constants.php')) {
 //     require_once '/secrets/db_constants.php';
 // }
