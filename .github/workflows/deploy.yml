@@ -20,7 +20,7 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} 
 
     - name: Deploy on server
-      run: |
+      run: |   
         ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
           set -e
           APP_DIR=/home/${{ secrets.SERVER_USER }}/phpapp
