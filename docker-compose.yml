@@ -6,8 +6,31 @@ services:
     ports:
       - "8084:90"
     volumes:
-      - .:/var/www/html  
-      # - ./myapp:/var/www/html/myapp 
-      - /opt/secret-config:/secrets    
+      - .:/var/www/html
+      # - /opt/secret-config:/secrets:ro  # Read-only mount
+    secrets:
+      - db_password
+      - db_user
+    environment:
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      DB_USER_FILE: /run/secrets/db_user
+      CONFIG_DIR: /secrets  # For non-secret configs
+
+secrets:
+  db_password:
+    external: true
+  db_user:
+    external: true
+# services:
+#   php-apache:
+#     build: .
+#     ports:
+#       - "8084:90"
+#     volumes:
+#       - .:/var/www/html  
+#       - /opt/secret-config:/secrets  
+
+      
+      # - ./myapp:/var/www/html/myapp   
       # - /opt/secret-config/db_constants.php:/var/www/html/db_constants.php
 #- /opt/secret-configs/sentrifugo/config.local.php:/var/www/html/application/public/config.local.php
