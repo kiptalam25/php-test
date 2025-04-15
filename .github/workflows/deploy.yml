@@ -37,5 +37,5 @@ jobs:
           # Build and run Docker container
           docker build -t my-php-app .
           docker stop my-php-app || true && docker rm my-php-app || true
-          docker run -d --name my-php-app -p 80:90 my-php-app
+          docker run -d --name my-php-app -p 90:80 my-php-app
         EOF
