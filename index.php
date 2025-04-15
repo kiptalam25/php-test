@@ -1,7 +1,6 @@
 <?php
 
 echo("<h1>Dockerized world</h1>");
-exit;
 // if (file_exists('/secrets/db_constants.php')) {
 //     require_once '/secrets/db_constants.php';
 // }
