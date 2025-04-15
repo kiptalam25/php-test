@@ -1,4 +1,7 @@
 <?php
+
+echo("<h1>Dockerized world</h1>");
+exit;
 // if (file_exists('/secrets/db_constants.php')) {
 //     require_once '/secrets/db_constants.php';
 // }
@@ -16,7 +19,7 @@
 // echo "Password file path: " . ($password_path ?: 'NOT SET') . "\n";
 // echo "File exists: " . (file_exists($password_path) ? 'YES' : 'NO') . "\n";
 
-echo("<h1>Dockerized world</h1>");
+
 // Read secrets from file paths passed via environment variables
 // try{
 // $db_user = file_get_contents(getenv('DB_USER_FILE'));
