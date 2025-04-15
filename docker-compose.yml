@@ -2,25 +2,48 @@ version: '3.8'
 
 services:
   php-apache:
-    build: .
+    image: mysite-image
     ports:
-      - "8084:90"
+      - "8084:80"
     volumes:
       - .:/var/www/html
-      # - /opt/secret-config:/secrets:ro  # Read-only mount
     secrets:
       - db_password
       - db_user
     environment:
       DB_PASSWORD_FILE: /run/secrets/db_password
       DB_USER_FILE: /run/secrets/db_user
-      CONFIG_DIR: /secrets  # For non-secret configs
 
 secrets:
   db_password:
-    external: true
+    external: true  # Uses the pre-created secret
   db_user:
-    external: true
+    external: true  # Uses the pre-created secret
+
+
+#For deepseek
+# services:
+#   php-apache:
+#     build: .
+#     ports: ["8084:90"]
+#     volumes:
+#       - .:/var/www/html
+#       - /opt/secret-config:/secrets
+#     environment:
+#       DB_PASSWORD_FILE: ${DB_PASSWORD_FILE:-/run/secrets/db_password}
+#       DB_USER_FILE: ${DB_USER_FILE:-/run/secrets/db_user}
+#     secrets:  # Will be ignored in non-Swarm mode
+#       - db_password
+#       - db_user
+
+# secrets:
+#   db_password:
+#     external: ${SECRETS_EXTERNAL:-false}  # Default to false
+#   db_user:
+#     external: ${SECRETS_EXTERNAL:-false}
+
+
+
 # services:
 #   php-apache:
 #     build: .
