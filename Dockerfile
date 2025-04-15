@@ -7,4 +7,4 @@ RUN a2enmod rewrite
 RUN docker-php-ext-install pdo pdo_mysql
 
 # Optional: expose port 80 explicitly
-EXPOSE 80
+EXPOSE 90

@@ -4,6 +4,6 @@ services:
   php-apache:
     build: .
     ports:
-      - "8084:80"
+      - "8084:90"
     volumes:
       - .:/var/www/html
