@@ -6,7 +6,8 @@ services:
     ports:
       - "8084:90"
     volumes:
-      - ./myapp:/var/www/html/myapp  
-      - /opt/secret-config/db_constants.php:/var/www/html/db_constants.php
-
+      - .:/var/www/html  
+      # - ./myapp:/var/www/html/myapp 
+      - /opt/secret-config:/secrets
+      # - /opt/secret-config/db_constants.php:/var/www/html/db_constants.php
 #- /opt/secret-configs/sentrifugo/config.local.php:/var/www/html/application/public/config.local.php
