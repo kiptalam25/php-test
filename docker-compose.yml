@@ -7,5 +7,5 @@ services:
       - "8084:90"
     volumes:
       - .:/var/www/html  
-      - /opt/secret-configs/db_constants.php:/var/www/html/mysite/db_constants.php
+      - /opt/secret-configs/db_constants.php:/var/www/html/db_constants.php
 #- /opt/secret-configs/sentrifugo/config.local.php:/var/www/html/application/public/config.local.php
