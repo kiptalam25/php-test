@@ -48,6 +48,11 @@ jobs:
           echo ">>> Building image..."
           docker build -t mysite-image .
 
+          docker stack rm mysite || true
+
+          echo ">>> Waiting for stack removal..."
+          sleep 10
+
           echo ">>> Deploying stack..."
           docker stack deploy -c docker-compose.yml mysite
 
