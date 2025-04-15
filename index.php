@@ -18,9 +18,13 @@
 
 echo("<h1>Hello world</h1>");
 // Read secrets from file paths passed via environment variables
+try{
 $db_user = file_get_contents(getenv('DB_USER_FILE'));
 $db_pass = file_get_contents(getenv('DB_PASSWORD_FILE'));
 
 echo "DB Username: " . htmlspecialchars(trim($db_user)) . "<br>";
 echo "DB Password: " . htmlspecialchars(trim($db_pass)) . "<br>";
+}catch(Exception $e){
+    echo($e->getMessage());
+}
 ?>
