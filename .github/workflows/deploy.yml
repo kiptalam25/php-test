@@ -50,8 +50,6 @@ jobs:
           echo ">>> Building image..."
           docker build -t mysite-image .
 
-          docker stack rm mysite
-
           echo ">>> Deploying with docker stack..."
           docker stack deploy -c docker-compose.yml mysite
 
