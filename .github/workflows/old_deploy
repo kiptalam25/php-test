@@ -1,0 +1,55 @@
+name: Deploy to Docker Swarm via Stack
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to Docker Swarm
+      env:
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        SERVER_HOST: ${{ secrets.SERVER_HOST }}
+      run: |
+        ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST << EOF
+          set -e
+
+          APP_DIR=/home/$SERVER_USER/phpapp
+
+          echo ">>> Updating source code..."
+
+          if [ ! -d "$APP_DIR/.git" ]; then
+            echo ">>> Cloning repository for the first time..."
+            rm -rf \$APP_DIR
+            git clone https://github.com/kiptalam25/php-test.git \$APP_DIR
+          else
+            echo ">>> Pulling latest changes..."
+            cd \$APP_DIR && git pull
+          fi
+
+          cd \$APP_DIR
+
+          echo ">>> Creating secrets (if not already created)..."
+          docker secret inspect db_password > /dev/null 2>&1 || echo "my-db-password" | docker secret create db_password -
+          docker secret inspect db_user > /dev/null 2>&1 || echo "my-db-user" | docker secret create db_user -
+
+          echo ">>> Building image..."
+          docker build -t mysite-image .
+
+          echo ">>> Deploying stack..."
+          docker stack deploy -c docker-compose.yml mysite
+
+          echo ">>> Done!"
+        EOF
