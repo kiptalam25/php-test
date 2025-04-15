@@ -30,11 +30,16 @@ jobs:
           APP_DIR=/home/$SERVER_USER/phpapp
 
           echo ">>> Updating source code..."
-          if [ ! -d "$APP_DIR" ]; then
+          if [ ! -d "$APP_DIR/.git" ]; then
+            echo ">>> Cloning repository for the first time..."
+            rm -rf \$APP_DIR
             git clone https://github.com/kiptalam25/php-test.git \$APP_DIR
           else
-            cd \$APP_DIR && git pull
+            echo ">>> Pulling latest changes..."
+            cd \$APP_DIR
+            git pull
           fi
+
 
           cd \$APP_DIR
 
