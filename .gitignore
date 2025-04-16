@@ -1,5 +1,7 @@
 # Ignore sensitive configuration files
-/db_config.php
+/config/db_config.php
+
+*db_config.php
 # Common PHP patterns
 /vendor/
 .env

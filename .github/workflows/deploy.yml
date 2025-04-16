@@ -13,6 +13,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Create database configuration
+      run: |
+        mkdir -p config
+        cat > config/db_config.php <<EOF
+        <?php
+        define('DB_HOST', '${{ secrets.DB_HOST }}');
+        define('DB_USER', '${{ secrets.DB_USER }}');
+        define('DB_PASS', '${{ secrets.DB_PASSWORD }}');
+        define('DB_NAME', '${{ secrets.DB_NAME }}');
+        EOF
+        
+    - name: Verify file was created
+      run: |
+        ls -la config/
+        # For debugging (remove in production):
+        cat config/db_config.php | sed 's/define.*/REDACTED/'
+
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.7.0
       with:
