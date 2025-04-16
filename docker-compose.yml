@@ -6,7 +6,7 @@ services:
     ports:
       - "8082:80"
     deploy:
-      replicas: 3
+      replicas: 1
     volumes:
       - .:/var/www/html
     secrets:
@@ -18,9 +18,9 @@ services:
 
 secrets:
   db_password:
-    external: true  # Uses the pre-created secret
+    external: true  
   db_user:
-    external: true  # Uses the pre-created secret
+    external: true  
 
 
 #For deepseek
