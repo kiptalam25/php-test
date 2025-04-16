@@ -9,7 +9,7 @@ services:
       replicas: 1
     volumes:
       - .:/var/www/html
-      # - ./config/db_config.php:/var/www/html/config/db_config.php:ro
+      - ./config/db_config.php:/var/www/html/config/db_config.php
     secrets:
       - db_password
       - db_user
