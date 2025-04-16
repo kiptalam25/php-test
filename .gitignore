@@ -1,0 +1,8 @@
+# Ignore sensitive configuration files
+/db_config.php
+# Common PHP patterns
+/vendor/
+.env
+*.log
+.idea/
+.DS_Store

@@ -5,6 +5,8 @@ services:
     image: mysite-image
     ports:
       - "8082:80"
+    deploy:
+      replicas: 3
     volumes:
       - .:/var/www/html
     secrets:
