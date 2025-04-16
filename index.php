@@ -1,16 +1,6 @@
 <?php
-require __DIR__.'/config/db_config.php';
 
-// Your normal application code here...
-
-// DEBUG OUTPUT - REMOVE THIS IN PRODUCTION!
-echo '<div style="background:#f0f0f0; padding:10px; margin:20px; border:1px solid red;">';
-echo '<strong>DEBUG OUTPUT (REMOVE IN PRODUCTION):</strong><br>';
-echo 'DB_HOST: ' . htmlspecialchars(DB_HOST) . '<br>';
-echo 'DB_USER: ' . htmlspecialchars(DB_USER) . '<br>';
-echo 'DB_NAME: ' . htmlspecialchars(DB_NAME) . '<br>';
-echo 'DB_PASS: ' . (defined('DB_PASS') ? '***REDACTED***' : 'undefined');
-echo '</div>';
+echo("<h1>Dockerizing this Server!!!</h1>");
 // if (file_exists('/secrets/db_constants.php')) {
 //     require_once '/secrets/db_constants.php';
 // }
