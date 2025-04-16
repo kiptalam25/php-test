@@ -13,22 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Create database configuration
-      run: |
-        cat > config/db_config.php <<EOF
-        <?php
-        define('DB_HOST', '${{ secrets.DB_HOST }}');
-        define('DB_USER', '${{ secrets.DB_USER }}');
-        define('DB_PASS', '${{ secrets.DB_PASSWORD }}');
-        define('DB_NAME', '${{ secrets.DB_NAME }}');
-        EOF
-        
-    - name: Verify file was created
-      run: |
-        ls -la config/
-        # For debugging (remove in production):
-        cat config/db_config.php | sed 's/define.*/REDACTED/'
-
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.7.0
       with:
@@ -56,6 +40,16 @@ jobs:
           fi
 
           cd \$APP_DIR
+
+            echo ">>> Creating db_config.php..."
+        mkdir -p config
+        cat > config/db_config.php <<EOCONFIG
+        <?php
+        define('DB_HOST', '${{ secrets.DB_HOST }}');
+        define('DB_USER', '${{ secrets.DB_USER }}');
+        define('DB_PASS', '${{ secrets.DB_PASSWORD }}');
+        define('DB_NAME', '${{ secrets.DB_NAME }}');
+        EOCONFIG
 
           echo ">>> Creating secrets (if not already created)..."
           docker secret inspect db_password > /dev/null 2>&1 || echo "my-db-password" | docker secret create db_password -
